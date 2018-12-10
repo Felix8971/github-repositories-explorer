@@ -1,0 +1,48 @@
+html {
+    background: #e0e0e0;
+    font-family: 'Raleway', sans-serif;
+    padding: 0;
+    .title{
+        text-align:center;
+        margin:30px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {    
+    display: flex; /* or inline-flex */
+    justify-content: center;
+    flex-direction: row;
+}
+
+.input, .output {
+    border:1px solid grey;
+    height:100%;
+    width:100%;
+}
+
+.column{
+    width:40%;
+    height:500px;
+    margin: 5px;
+}
+
+/* Small screens */
+@media all and (max-width: 500px) {
+    .container {
+        /* On small screens, we are using column direction */
+        flex-direction: column;
+        justify-content: center;
+    }
+    .column{
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 30px;
+    } 
+   
+}
