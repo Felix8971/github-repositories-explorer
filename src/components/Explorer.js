@@ -27,22 +27,17 @@ import {transformInputSelector} from '../Selectors';
   */
 
 /*
- In this component, we have two exports.
+ If you check this component, we have two exports.
  The first export will export the dumb component Convertion and the default export will export the connected component connect(Convertion).
  We export both so that if we want to :
-  * Test just the React component alone, we test the dumb component.
+  * Test just the React component alone, you test the dumb component.
   * Test React-Redux part of the component, then test the connected component.
 */
 
-export class Convertion extends React.Component {
+export class Explorer extends React.Component {
   constructor(props) {
     super();
-    this.handleInput = this.handleInputChange.bind(this);
-  }
-  
-  handleInputChange(event, onInputChange) {
-    onInputChange(event.target.value);
-    console.log(event.target.value);
+   
   }
 
   render() {
@@ -50,24 +45,7 @@ export class Convertion extends React.Component {
     console.log('this.props=',this.props);
     return (
       <div className="container">
-        <div className="column">
-          <div>Input</div>
-          <textarea 
-            rows="4"
-            cols="50"
-            className="input"
-            onChange={event => this.handleInputChange(event, self.props.onInputChange)}
-            value={this.props.input}
-            placeholder="Copy past a json file here..."
-          >
-          </textarea>
-        </div>
-        <div className="column">
-          <div>Output</div>   
-          <textarea rows="4" cols="50" className="output" value={this.props.output} onChange={() => {}} >
-            <pre></pre>
-          </textarea>
-        </div>
+      
       </div>
     );
   
@@ -91,4 +69,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 //Connects the App component to the Redux store.
-export default connect(mapStateToProps, mapDispatchToProps)(Convertion);
+export default connect(mapStateToProps, mapDispatchToProps)(Explorer);

@@ -47,10 +47,10 @@ const config = {
         test: /\.svg$/,
         use: [
           {
-            loader: "babel-loader"
+            loader: 'babel-loader'
           },
           {
-            loader: "react-svg-loader",
+            loader: 'react-svg-loader',
             options: {
               jsx: true // true outputs JSX tags
             }
@@ -60,9 +60,9 @@ const config = {
       {
         test: /\.scss$/i,
         use: [
-          "style-loader", // creates style nodes from JS strings
-          "css-loader", // translates CSS into CommonJS
-          "sass-loader" // compiles Sass to CSS
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader' // compiles Sass to CSS
         ],
       },
     ],
