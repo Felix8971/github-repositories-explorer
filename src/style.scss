@@ -14,10 +14,11 @@ html {
 }
 
 
-.container {    
+.containerConvertion {    
     display: flex; /* or inline-flex */
     justify-content: center;
     flex-direction: row;
+    margin-bottom: 30px;
 }
 
 .input, .output {
@@ -31,6 +32,46 @@ html {
     height:500px;
     margin: 5px;
 }
+
+
+
+.containerExplorer {    
+    display: flex; /* or inline-flex */
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+
+.button {
+    background: white;
+    border: 2px solid #000000;
+    color: #000000;
+    border-radius: 0px;
+    padding: 9px;
+    font-weight: bold;
+    margin: 12px;
+    width:100px;
+    cursor: pointer;
+    &:hover {
+        background: #ebe8e8;
+    }
+}
+
+.img {
+    background-size: cover;
+    background-position: center center;
+    opacity:1;
+}
+
+
+.item {
+   display: flex; 
+   margin:3px;
+   .blockInfo{
+       margin:10px;
+   }
+} 
 
 /* Small screens */
 @media all and (max-width: 500px) {

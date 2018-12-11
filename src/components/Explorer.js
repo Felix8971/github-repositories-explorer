@@ -1,72 +1,72 @@
 import React from 'react'
-import {updateInputTextAction} from '../actions';
+import {incrementCurrentIndex, decrementCurrentIndex, updateMaxId} from '../actions';
 import { connect } from 'react-redux';
-import {transformInputSelector} from '../Selectors';
-
-/* input
-    { 
-    "0": [ 
-           { "id": 10, "title": "House", "level": 0, "children": [], "parent_id": null} 
-         ],
-    "1": [ 
-           { "id": 12, "title": "Red Roof", "level": 1, "children": [], "parent_id": 10},
-           { "id": 18, "title": "Blue Roof","level": 1, "children": [], "parent_id": 10},
-           { "id": 13, "title": "Wall",     "level": 1, "children": [], "parent_id": 10}
-         ],
-    "2": [ 
-           { "id": 17, "title": "Blue Window", "level": 2, "children": [], "parent_id": 12}, 
-           { "id": 16, "title": "Door", "level": 2, "children": [], "parent_id": 13 },
-           { "id": 15, "title": "Red Window", "level": 2, "children": [], "parent_id": 12 }
-         ]
-    }
-
-    we will insert 12, 18 and 13 inside the children property of 10 because they have "parent_id": 10
-    we will insert 17 and 15 inside the children array of 12
-    we will insert 16 inside the children array of 13
-   
-  */
-
-/*
- If you check this component, we have two exports.
- The first export will export the dumb component Convertion and the default export will export the connected component connect(Convertion).
- We export both so that if we want to :
-  * Test just the React component alone, you test the dumb component.
-  * Test React-Redux part of the component, then test the connected component.
-*/
+import {returnRepoPage} from '../Selectors';
+import Button from './Button';
 
 export class Explorer extends React.Component {
   constructor(props) {
     super();
-   
+  }
+  
+  componentDidMount() {
+    
   }
 
   render() {
     const self = this;
+    console.log('this.props.repoList=',this.props.repoList[0]);
     console.log('this.props=',this.props);
+    
+    const repoList = self.props.repoList ? 
+      self.props.repoList.map(function (item, i) {
+        return (
+          <div key={i} className="item">
+            <img src={item.owner.avatar_url} alt="owner avatar" height='150' width='150'></img>
+            <div className="blockInfo">
+              <div>id: {item.id}</div>
+              <div>Name: {item.name}</div>
+              <div>Description: {item.description}</div>
+            </div>
+          </div>
+        );
+      })
+      :
+      null;
+
     return (
-      <div className="container">
-      
+      <div className='containerExplorer'>
+        <div>
+          <Button className="button" handleClick={self.props.previousPage}>Previous</Button>
+          <Button className="button" handleClick={self.props.nextPage}>Next</Button>
+        </div>
+        {repoList}
       </div>
     );
-  
   }
 }
-
+// <div className="img" onClick={() => { } style={{ backgroundImage: 'url(images/' + item.image + ')' }}></div>
 
 const mapStateToProps = (state) => {
   return {
-    input: state.inputText, 
-    output: transformInputSelector(state.inputText), 
+    repoList: returnRepoPage(state.currentIndex, state.repoList),
+    currentIndex: state.currentIndex,
+    maxId: state.maxId,// used for since param in url
   }
 };
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
   return {
-    onInputChange : (data) => {
-      dispatch(updateInputTextAction(data));
+    nextPage : () => {
+      // dispatch(updateMaxId(currentIndex));
+      dispatch(incrementCurrentIndex());
+    },
+    previousPage : () => {
+      dispatch(decrementCurrentIndex());
     },
   };
 }
 
 //Connects the App component to the Redux store.
 export default connect(mapStateToProps, mapDispatchToProps)(Explorer);
+

@@ -5,7 +5,12 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import rootReducer from './reducers'
 
-const store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+const initialState = { 
+  repoList: [], currentIndex: 0, maxId: 1, 
+};
+
+const store = createStore(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 render(
   <Provider store={store}>

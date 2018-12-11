@@ -1,3 +1,5 @@
+const NB_REPO_PER_PAGE = 10;
+
 export const transformInputSelector = (state) => {
   let matrix = [];
   console.log('state=',state);
@@ -27,4 +29,9 @@ export const transformInputSelector = (state) => {
     }
   }
   return matrix.length > 0 ? JSON.stringify(matrix, null, 2) : '';
+}
+
+
+export const returnRepoPage = (index, state) => {
+  return state.slice(index, index+NB_REPO_PER_PAGE);
 }

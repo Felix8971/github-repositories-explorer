@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import '../style.scss';
 import Convertion from './Convertion';
+import { connect } from 'react-redux';
 import Explorer from './Explorer';
+import { getRepos } from '../helpers';
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-   
+    getRepos(this.props.dispatch, 0);//we add the repo list to the store
   }
 
   render() {
@@ -26,6 +28,8 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = (state) => { return state };
 
 //Connects the App component to the Redux store.
-export default App;
+export default connect(mapStateToProps)(App);
+

@@ -1,6 +1,6 @@
 import React from 'react'
 import {updateInputTextAction} from '../actions';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {transformInputSelector} from '../Selectors';
 
 /* input
@@ -47,9 +47,9 @@ export class Convertion extends React.Component {
 
   render() {
     const self = this;
-    console.log('this.props=',this.props);
+    // console.log('this.props=',this.props);
     return (
-      <div className="container">
+      <div className="containerConvertion">
         <div className="column">
           <div>Input</div>
           <textarea 
