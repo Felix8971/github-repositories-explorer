@@ -1,0 +1,5 @@
+- use styled components
+- improve design and css
+- fetch again after reaching maxId in 100 elements array 
+- write tests
+

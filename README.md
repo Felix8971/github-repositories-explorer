@@ -14,4 +14,4 @@ Omise react code challenge
 
 ### tests 
 
-1. run `yarn test` 
+1. run `yarn test` (or `yarn test -u` to delete snapshots)

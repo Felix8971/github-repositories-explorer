@@ -1,5 +1,5 @@
 import React from 'react'
-import {incrementCurrentIndex, decrementCurrentIndex, updateMaxId} from '../actions';
+import {incrementCurrentIndex, decrementCurrentIndex /*, updateMaxId*/} from '../actions';
 import { connect } from 'react-redux';
 import {returnRepoPage} from '../Selectors';
 import Button from './Button';
@@ -15,11 +15,11 @@ export class Explorer extends React.Component {
 
   render() {
     const self = this;
-    console.log('this.props.repoList=',this.props.repoList[0]);
-    console.log('this.props=',this.props);
+    // console.log('this.props.repoList=',this.props.repoList[0]);
+    // console.log('this.props=',this.props);
     
     const repoList = self.props.repoList ? 
-      self.props.repoList.map(function (item, i) {
+      self.props.repoList.map( (item, i) => {
         return (
           <div key={i} className="item">
             <img src={item.owner.avatar_url} alt="owner avatar" height='150' width='150'></img>
@@ -45,7 +45,6 @@ export class Explorer extends React.Component {
     );
   }
 }
-// <div className="img" onClick={() => { } style={{ backgroundImage: 'url(images/' + item.image + ')' }}></div>
 
 const mapStateToProps = (state) => {
   return {
@@ -55,7 +54,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-function mapDispatchToProps(dispatch, ownProps) {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     nextPage : () => {
       // dispatch(updateMaxId(currentIndex));

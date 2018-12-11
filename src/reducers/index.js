@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+
 const NB_REPO_PER_PAGE = 10;
 
 const inputText = (state = '', action) => {
@@ -7,18 +8,18 @@ const inputText = (state = '', action) => {
       // console.log('action.data=', action.data)
       return action.data;
     default:
-      return state
+      return state;
   }
-}
+};
 
 const repoList = (state = '', action) => {
   switch (action.type) {
     case 'UPDATE_REPO_LIST':
       return action.data;
     default:
-      return state
+      return state;
   }
-}
+};
 
 const currentIndex = (state = 0, action) => {
   switch (action.type) {
@@ -27,22 +28,22 @@ const currentIndex = (state = 0, action) => {
     case 'DECREMENT_CURRENT_INDEX':
       return state - NB_REPO_PER_PAGE;
     default:
-      return state
+      return state;
   }
-}
+};
 
 const maxId = (state = 0, action) => {
   switch (action.type) {
     case 'UPDATE_MAX_ID':
       return action.data;
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default combineReducers({
   inputText,
   repoList,
   currentIndex,
   maxId,
-})
+});

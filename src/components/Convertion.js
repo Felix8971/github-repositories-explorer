@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {updateInputTextAction} from '../actions';
 import {connect} from 'react-redux';
 import {transformInputSelector} from '../Selectors';
@@ -82,7 +82,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     onInputChange : (data) => {
       dispatch(updateInputTextAction(data));
