@@ -21,7 +21,6 @@ const repoList = (state = '', action) => {
   }
 };
 
-
 const currentIndex = (state = 0, action) => {
   switch (action.type) {
     case 'INCREMENT_CURRENT_INDEX':
@@ -59,6 +58,15 @@ const maxId = (state = 0, action) => {
 const previousRepoListIdMin = (state = 0, action) => {
   switch (action.type) {
     case 'SET_PREV_REPO_ID_MIN':
+      return action.data;
+    default:
+      return state;
+  }
+};
+
+const error = (state = '', action) => {
+  switch (action.type) {
+    case 'ERROR':
       return action.data;
     default:
       return state;
@@ -115,4 +123,5 @@ export default combineReducers({
   previousRepoListIdMin,
   chapterId,
   chapterId2MinId,
+  error,
 });

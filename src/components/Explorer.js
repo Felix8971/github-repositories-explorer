@@ -49,8 +49,10 @@ export class Explorer extends React.Component {
           <Button className="button" handleClick={() => self.props.previousPage(self.props)}>Previous</Button>
           <Button className="button" handleClick={() => self.props.nextPage(self.props)}>Next</Button>
         </div>
-        <div>Chapter:{self.props.chapterId}</div>
-        <div>Page:{self.props.currentIndex/10 + 1}</div>
+        <div className='infoPagination'>
+          <div>Chapter:{self.props.chapterId} / Page:{self.props.currentIndex/10 + 1}</div>
+        </div>
+        <div className='error'>{self.props.error}</div>
         <div className='containerExplorer'>     
           {repoList}
         </div>
@@ -70,6 +72,7 @@ const mapStateToProps = (state) => {
     previousRepoListIdMin: state.previousRepoListIdMin,
     chapterId: state.chapterId, // id of the current chapter (10 pages)
     chapterId2MinId: state.chapterId2MinId, // array giving the min id for each chapter explored
+    error: state.error,
   }
 };
 

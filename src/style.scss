@@ -88,6 +88,16 @@ html {
    text-align: center;
 }
 
+.infoPagination{
+   text-align: center;
+   margin:5px;
+}
+
+.error{
+   color:red;
+   font-size: 30px; 
+   text-align: center;
+}
 /* Small screens */
 @media only screen and (max-width: 350px) {
     .container {

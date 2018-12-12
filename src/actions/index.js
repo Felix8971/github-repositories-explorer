@@ -71,3 +71,8 @@ export const addChapter = data => ({
   type: 'ADD_CHAPTER',
   data,
 });
+
+export const addError = data => ({
+  type: 'ERROR',
+  data,
+});

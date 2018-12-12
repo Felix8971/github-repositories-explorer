@@ -1,6 +1,6 @@
 
 import fetch from 'isomorphic-fetch';
-import { updateRepoList, updateMinId, updateMaxId, updateFirstId } from './actions'
+import { updateRepoList, updateMinId, updateMaxId, updateFirstId, addError } from './actions'
 const url = 'https://api.github.com';
 import { NB_REPO_PER_CHAPTER } from './Constant';
 
@@ -15,7 +15,7 @@ export const getRepos = (dispatch, since = 0) => {
     })
     .catch((error) => {
       if ( dispatch ) {
-        // dispatch(updateRepoList(data));
+        dispatch(addError('Server error...'));
       }
     });
 }
