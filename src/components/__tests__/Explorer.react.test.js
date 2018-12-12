@@ -1,5 +1,5 @@
-import React from 'react';
-import { shallow /*, mount, render*/ } from 'enzyme';
+// import React from 'react';
+// import { shallow /*, mount, render*/ } from 'enzyme';
 import {Explorer} from '../Explorer';
 import * as enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -11,11 +11,11 @@ describe('Explorer', () => {
     expect(Explorer).toBeDefined();
   });
 
-  it('should render correctly', () => {
+  /*it('should render correctly', () => {
     const tree = shallow(
       <Explorer/>
     );
     expect(tree).toMatchSnapshot();
-  });
+  });*/
 
 });

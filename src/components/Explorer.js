@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import {returnRepoPage} from '../Selectors';
 import Button from './Button';
 import { getRepos } from '../helpers';
+import { NB_REPO_PER_PAGE, NB_REPO_PER_CHAPTER } from '../Constant';
 
 export class Explorer extends React.Component {
   constructor(props) {
@@ -25,9 +26,6 @@ export class Explorer extends React.Component {
 
   render() {
     const self = this;
-    // console.log('this.props.repoList=',this.props.repoListPage);
-    // console.log('this.props=',this.props);
-    // console.log('this.props.chapterId2MinId=',this.props.chapterId2MinId);
 
     const repoList = self.props.repoListPageContent ? 
       self.props.repoListPageContent.map( (item, i) => {
@@ -79,8 +77,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     nextPage : (props) => {
-      // console.log('==> props=', props);
-      if ( props.currentIndex === 90 ) {
+      if ( props.currentIndex === NB_REPO_PER_CHAPTER - NB_REPO_PER_PAGE ) {//90
         // We save the min id of the page we are leaving in order to 
         // be able to come back to this page later 
         //dispatch(setPreviousRepoListIdMin(props.minId));
@@ -94,11 +91,10 @@ const mapDispatchToProps = (dispatch) => {
       }
     },
     previousPage : (props) => {
-      //console.log('==> props=', props);
       if ( props.currentIndex === 0 && props.minId !== props.firstId) {
         dispatch(resetRepoList());
         getRepos(dispatch, props.chapterId2MinId[props.chapterId - 2] - 1);
-        dispatch(setCurrentIndex(90));
+        dispatch(setCurrentIndex(NB_REPO_PER_CHAPTER - NB_REPO_PER_PAGE));//90
         dispatch(decrementChapterId());//previous chapter
       } else {
         dispatch(decrementCurrentIndex());//previous page

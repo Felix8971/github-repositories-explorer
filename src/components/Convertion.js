@@ -42,12 +42,10 @@ export class Convertion extends React.Component {
   
   handleInputChange(event, onInputChange) {
     onInputChange(event.target.value);
-    // console.log(event.target.value);
   }
 
   render() {
     const self = this;
-    // console.log('this.props=',this.props);
     return (
       <div className="containerConvertion">
         <div className="column">

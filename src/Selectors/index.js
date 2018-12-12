@@ -2,11 +2,9 @@ const NB_REPO_PER_PAGE = 10;
 
 export const transformInputSelector = (state) => {
   let matrix = [];
-  // console.log('state=',state);
   if (state) {
     try {
       const input = JSON.parse(state);
-      // console.log('input object=',input);
       for (const i in input) {
         if (Object.prototype.hasOwnProperty.call(input, i)) {
           for (let j = 0; j < input[i].length; j++) {
@@ -14,7 +12,6 @@ export const transformInputSelector = (state) => {
           }
         }
       }
-      // console.log('matrix=',matrix);
       for (let i = 0; i < matrix.length; i++) {
         const parentId = matrix[i].parent_id;
         if (parentId !== null) {

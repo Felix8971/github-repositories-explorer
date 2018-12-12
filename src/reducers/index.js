@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
-
-const NB_REPO_PER_PAGE = 10;
+import { NB_REPO_PER_PAGE } from '../Constant';
 
 const inputText = (state = '', action) => {
   switch (action.type) {
     case 'UPDATE_INPUT':
-      // console.log('action.data=', action.data)
       return action.data;
     default:
       return state;
@@ -106,7 +104,6 @@ const chapterId2MinId = (state = [], action) => {
       return state;
   }
 };
-
 
 export default combineReducers({
   inputText,

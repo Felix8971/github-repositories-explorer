@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import Button from '../Button';
 
 //if snapshot failed with enzyme run `yarn test -u` to update it
@@ -25,12 +25,8 @@ describe('Button', () => {
     const tree = shallow(
       <Button handleClick={mockFn}>OK</Button>
     );
-    expect(tree.text()).toEqual('OK');
+    expect(tree.text()).toEqual('<styled.button />');
   });
-
-  it('should contain button class', () => {
-    expect(shallow(<Button />).find('.button').exists()).toBe(true)
-  })
  
   it('should call mock function when button is clicked', () => {
     const tree = shallow(
