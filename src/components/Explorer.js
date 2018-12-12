@@ -1,28 +1,39 @@
 import React from 'react'
-import {incrementCurrentIndex, decrementCurrentIndex /*, updateMaxId*/} from '../actions';
+import {
+  incrementCurrentIndex,
+  decrementCurrentIndex,
+  setCurrentIndex,
+  resetCurrentIndex,
+  resetRepoList,
+  incrementChapterId,
+  decrementChapterId,
+  addChapter,
+} from '../actions';
 import { connect } from 'react-redux';
 import {returnRepoPage} from '../Selectors';
 import Button from './Button';
+import { getRepos } from '../helpers';
 
 export class Explorer extends React.Component {
   constructor(props) {
     super();
   }
-  
+
   componentDidMount() {
-    
+    this.props.initChapter();//we init the chapter id (the first 10 pages)
   }
 
   render() {
     const self = this;
-    // console.log('this.props.repoList=',this.props.repoList[0]);
+    // console.log('this.props.repoList=',this.props.repoListPage);
     // console.log('this.props=',this.props);
-    
-    const repoList = self.props.repoList ? 
-      self.props.repoList.map( (item, i) => {
+    // console.log('this.props.chapterId2MinId=',this.props.chapterId2MinId);
+
+    const repoList = self.props.repoListPageContent ? 
+      self.props.repoListPageContent.map( (item, i) => {
         return (
           <div key={i} className="item">
-            <img src={item.owner.avatar_url} alt="owner avatar" height='150' width='150'></img>
+            <img className="img" src={item.owner.avatar_url} alt="owner avatar" ></img>
             <div className="blockInfo">
               <div>id: {item.id}</div>
               <div>Name: {item.name}</div>
@@ -35,12 +46,16 @@ export class Explorer extends React.Component {
       null;
 
     return (
-      <div className='containerExplorer'>
-        <div>
-          <Button className="button" handleClick={self.props.previousPage}>Previous</Button>
-          <Button className="button" handleClick={self.props.nextPage}>Next</Button>
+      <div>
+        <div className="btnGroup"> 
+          <Button className="button" handleClick={() => self.props.previousPage(self.props)}>Previous</Button>
+          <Button className="button" handleClick={() => self.props.nextPage(self.props)}>Next</Button>
         </div>
-        {repoList}
+        <div>Chapter:{self.props.chapterId}</div>
+        <div>Page:{self.props.currentIndex/10 + 1}</div>
+        <div className='containerExplorer'>     
+          {repoList}
+        </div>
       </div>
     );
   }
@@ -48,20 +63,49 @@ export class Explorer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    repoList: returnRepoPage(state.currentIndex, state.repoList),
+    firstId: state.firstId,
+    repoList: state.repoList,
+    repoListPageContent: returnRepoPage(state.currentIndex, state.repoList),
     currentIndex: state.currentIndex,
-    maxId: state.maxId,// used for since param in url
+    minId: state.minId,
+    maxId: state.maxId,
+    previousRepoListIdMin: state.previousRepoListIdMin,
+    chapterId: state.chapterId, // id of the current chapter (10 pages)
+    chapterId2MinId: state.chapterId2MinId, // array giving the min id for each chapter explored
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+
+const mapDispatchToProps = (dispatch) => {
   return {
-    nextPage : () => {
-      // dispatch(updateMaxId(currentIndex));
-      dispatch(incrementCurrentIndex());
+    nextPage : (props) => {
+      // console.log('==> props=', props);
+      if ( props.currentIndex === 90 ) {
+        // We save the min id of the page we are leaving in order to 
+        // be able to come back to this page later 
+        //dispatch(setPreviousRepoListIdMin(props.minId));
+        dispatch(resetCurrentIndex());
+        dispatch(resetRepoList());
+        getRepos(dispatch, props.maxId);//we add the new repo list to the store
+        dispatch(incrementChapterId());//new chapter
+        dispatch(addChapter(props.minId));
+      } else {
+        dispatch(incrementCurrentIndex());//next page
+      }
     },
-    previousPage : () => {
-      dispatch(decrementCurrentIndex());
+    previousPage : (props) => {
+      //console.log('==> props=', props);
+      if ( props.currentIndex === 0 && props.minId !== props.firstId) {
+        dispatch(resetRepoList());
+        getRepos(dispatch, props.chapterId2MinId[props.chapterId - 2] - 1);
+        dispatch(setCurrentIndex(90));
+        dispatch(decrementChapterId());//previous chapter
+      } else {
+        dispatch(decrementCurrentIndex());//previous page
+      }
+    },
+    initChapter: () => {
+      dispatch(incrementChapterId());//new chapter
     },
   };
 }

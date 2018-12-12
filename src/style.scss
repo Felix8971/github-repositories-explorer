@@ -38,11 +38,18 @@ html {
 .containerExplorer {    
     display: flex; /* or inline-flex */
     justify-content: center;
-    flex-direction: column;
+    //flex-direction: column;
     margin-bottom: 30px;
+    align-items: center;
+
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
-
+.btnGroup{
+    display: flex;
+    justify-content: center;
+}
 .button {
     background: white;
     border: 2px solid #000000;
@@ -59,22 +66,30 @@ html {
 }
 
 .img {
-    background-size: cover;
-    background-position: center center;
-    opacity:1;
+    max-width: 200px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
 }
 
 
 .item {
    display: flex; 
+   align-items: center;
    margin:3px;
+   border: 1px solid #cecece;
+   width: 580px;
    .blockInfo{
        margin:10px;
    }
 } 
 
+.step{
+   text-align: center;
+}
+
 /* Small screens */
-@media all and (max-width: 500px) {
+@media only screen and (max-width: 350px) {
     .container {
         /* On small screens, we are using column direction */
         flex-direction: column;
@@ -85,5 +100,21 @@ html {
         margin: 0 auto;
         margin-top: 30px;
     } 
-   
+    .item {
+        display: flex; 
+        margin:3px;
+        border: 1px solid #cecece;
+        width: 95%;
+        align-items: center;
+        .blockInfo{
+            margin:10px;
+        }
+     } 
+
+     .img{
+        max-width:230px;
+        max-height:95px;
+        width: auto;
+        height: auto;
+     }
 }

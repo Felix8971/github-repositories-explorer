@@ -15,13 +15,13 @@ class App extends Component {
   }
 
   render() {
-    console.log('this=', this);
+    // console.log('this=', this);
     return (
       <div>
         <h1 className="title">GitHuh repositories explorer</h1>
-        <h2>Step 1</h2>
+        <h2 className='step'>Step 1</h2>
         <Convertion />
-        <h2>Step 2</h2>
+        <h2 className='step'>Step 2</h2>
         <Explorer />
       </div>
     );

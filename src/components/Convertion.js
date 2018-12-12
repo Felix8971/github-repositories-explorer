@@ -42,7 +42,7 @@ export class Convertion extends React.Component {
   
   handleInputChange(event, onInputChange) {
     onInputChange(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   }
 
   render() {
@@ -73,7 +73,6 @@ export class Convertion extends React.Component {
   
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {
